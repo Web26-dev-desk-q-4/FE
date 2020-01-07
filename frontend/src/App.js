@@ -1,10 +1,5 @@
 import React, { useState } from "react";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  useHistory
-} from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 import NavBar from "./components/NavBar";
 import Login2 from "./components/Login2";
@@ -30,40 +25,35 @@ function App() {
     account: { username: "", password: "" }
   });
   const endPointURL = "https://whatever.what";
-  const history = useHistory();
+  // const uhist = useHistory();
   const loginFormSubmit = ({ data: account, errors }) => {
     // we should send the account info to the backend
     const clone = { ...appState };
     clone.account = account;
     axios.put(endPointURL, account).then(result => {
       // do something
-      history.replace("/nextpage");
+      //history.replace("/nextpage");
     });
     setAppState(clone);
   };
 
   const registrationFormSubmit = props => {
-    const { data, errors } = props;
+    const { data } = props;
     console.log(data);
-    history.replace("/");
+    //history.replace("/");
   };
   const loginForm = () => {
     return <Login2 onSubmit={loginFormSubmit} />;
   };
 
   const registerForm = () => {
-    return <RegistrationForm onSubmit={registrationFormSubmit} />;
-  };
-
-  const homePage = () => {
-    return <h1>TO DO (homepage)</h1>;
+    return <Registration2 onSubmit={registrationFormSubmit} />;
   };
 
   return (
     <Router>
       <NavBar />
       <Switch>
-        <Route exact path="/" component={Login2} />
         <PrivateRoute
           path="/tickets/:id"
           component={props => <TicketCard {...props} />}
@@ -77,7 +67,7 @@ function App() {
         <PrivateRoute exact path="/tickets" component={TicketViews} />
         <Route path="/registration" component={Registration2} />
 
-        <Route path="/" exact component={homePage} />
+        <Route path="/" exact component={loginForm} />
         <Route path="/register" component={registerForm} />
         <Route path="/login" component={loginForm} />
       </Switch>

@@ -25,36 +25,39 @@ const inputfields = {
   }
 };
 
-const LoginForm = ({ onSubmit: liftUp }) => {
-  const handleErrors = result => {
-    console.log(result.errors);
-  };
-  const onSubmit = result => {
-    result.errors.length > 0 ? handleErrors(result) : liftUp(result);
-  };
+const LoginForm = props => {
+  const { onSubmit: liftUp } = props;
+  // const handleErrors = result => {
+  //   console.log(result.errors);
+  // };
+  // const onSubmit = result => {
+  //   result.errors.length > 0 ? handleErrors(result) : liftUp(result);
+  // };
 
-  login = e => {
-    e.preventDefault();
-    this.props.login(this.state.credentials).then(() => {
+  const doLogin = accountInfo => {
+    // const uname = accountInfo.username;
+    // const upass = acocuntInfo.password;
+    props.login(accountInfo).then(() => {
       setTimeout(() => {
-        this.props.history.push("/my-tickets");
+        liftUp(accountInfo);
+        props.history.push("/my-tickets");
       }, 1485);
     });
-    setTimeout(() => {
-      this.setState({
-        credentials: {
-          ...this.state.credentials,
-          username: "",
-          password: ""
-        }
-      });
-    }, 1485);
+    // setTimeout(() => {
+    //   this.setState({
+    //     credentials: {
+    //       ...this.state.credentials,
+    //       username: "",
+    //       password: ""
+    //     }
+    //   });
+    // }, 1485);
   };
 
   return (
     <GenericForm
       inputfields={inputfields}
-      onSubmit={onSubmit}
+      onSubmit={doLogin}
       formtitle="Login"
       buttonlabel="Sign In"
     />
