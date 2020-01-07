@@ -1,6 +1,5 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import "./index.css";
 import { createStore, applyMiddleware } from "redux";
 import { Provider } from "react-redux";
 import thunk from "redux-thunk";
@@ -8,8 +7,9 @@ import App from "./App";
 import rootReducer from "./reducers";
 import { setToken } from "./utils/token";
 import { loadState, saveState } from "./hooks/useLocalStorage";
-import 'bootstrap/dist/css/bootstrap.min.css';
 
+import "bootstrap/dist/css/bootstrap.min.css";
+import "./index.css";
 
 const persistedState = loadState();
 

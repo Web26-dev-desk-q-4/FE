@@ -1,5 +1,3 @@
-// "use strict";
-
 /*\
 |*|
 |*|  Base64 / binary data / UTF-8 strings utilities (#1)
@@ -115,3 +113,7 @@ function b64decode(b64String) {
 }
 
 export { b64encode, b64decode };
+
+//  paste directly in browser url bar:
+//  data:text/plain;charset=utf-16;base64,OCY5JjomOyY8Jj4mPyY=
+//  data:text/plain;charset=utf-16;base64,UwBtAG8AawBlACAAbQBlACAAYQAgAGsAaQBwAHAAZQByACwAIABJACcAbABsACAAYgBlACAAYgBhAGMAawAgAGYAbwByACAAYgByAGUAYQBrAGYAYQBzAHQA
