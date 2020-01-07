@@ -42,12 +42,17 @@ function App() {
     setAppState(clone);
   };
 
+  const registrationFormSubmit = props => {
+    const { data, errors } = props;
+    console.log(data);
+    history.replace("/");
+  };
   const loginForm = () => {
     return <Login2 onSubmit={loginFormSubmit} />;
   };
 
   const registerForm = () => {
-    return <h1>TO DO (register form)</h1>;
+    return <RegistrationForm onSubmit={registrationFormSubmit} />;
   };
 
   const homePage = () => {
