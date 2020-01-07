@@ -2,9 +2,11 @@ import React, { useState } from "react";
 import { Route, Switch, useHistory } from "react-router-dom";
 import LoginForm from "./components/loginForm";
 import NavBar from "./components/navBar";
+import RegistrationForm from "./components/registrationForm";
 // import { b64encode, b64decode } from "./components/common/chillout/madmurphy";
 import "./App.css";
 import axios from "axios";
+
 
 function App() {
   const [appState, setAppState] = useState({
@@ -23,12 +25,17 @@ function App() {
     setAppState(clone);
   };
 
+  const registrationFormSubmit = props => {
+    const {data, errors} = props;
+    console.log(data)
+    history.replace("/")
+  }
   const loginForm = () => {
     return <LoginForm onSubmit={loginFormSubmit} />;
   };
 
   const registerForm = () => {
-    return <h1>TO DO (register form)</h1>;
+    return <RegistrationForm onSubmit={registrationFormSubmit}/>
   };
 
   const homePage = () => {
