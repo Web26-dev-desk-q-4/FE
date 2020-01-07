@@ -46,7 +46,7 @@ const initialState = {
     student_id: ""
   },
 
-  categories: ["None", "React", "Vue", "Angular", "HTML", "CSS", "Backbone", "Ember"],
+  categories: ["None", "React", "JavaScript", "HTML", "CSS"],
   tickets: []
 };
 
