@@ -8,7 +8,7 @@ import rootReducer from "./reducers";
 import { setToken } from "./utils/token";
 import { loadState, saveState } from "./hooks/useLocalStorage";
 
-import "bootstrap/dist/css/bootstrap.min.css";
+// import "bootstrap/dist/css/bootstrap.min.css";
 import "./index.css";
 
 const persistedState = loadState();
