@@ -2,6 +2,16 @@ import React, { useState } from "react";
 import Input from "./input";
 import Select from "./select";
 import Joi from "@hapi/joi";
+import styled from "styled-components"
+import {teal, black, navy, grey, darkteal} from "./colorpallet"
+const GenDiv = styled.div`
+background-color: ${navy};
+color: ${grey};
+`
+// const BtnStyle = styled.button`  Tried to do it this way... but..
+// border: 3px solid ${darkteal};
+// background-color: ${navy};
+// `
 
 const GenericForm = ({
   onSubmit,
@@ -72,7 +82,7 @@ const GenericForm = ({
   };
 
   const renderButton = text => (
-    <button
+    <button style = {{backgroundColor: `${navy}`, border: `3px solid ${darkteal} ` }}
       disabled={Object.keys(validate()).length > 0}
       className="btn btn-primary"
     >
@@ -106,13 +116,13 @@ const GenericForm = ({
     onSubmit(cloned);
   };
   return (
-    <div className={divclass || `generic-form-${formtitle}`}>
+    <GenDiv className={divclass || `generic-form-${formtitle}`}>
       <h1>{formtitle}</h1>
       <form onSubmit={handleSubmit}>
         {inputComponents}
         {renderButton(buttonlabel)}
       </form>
-    </div>
+    </GenDiv>
   );
 };
 

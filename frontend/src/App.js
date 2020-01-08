@@ -76,11 +76,9 @@ function App() {
         <PrivateRoute path="/my-tickets" component={MyTickets} />
         <PrivateRoute path="/edit/:id" component={Edit} />
         <PrivateRoute exact path="/tickets" component={TicketViews} />
-        <Route path="/registration" component={Registration2} />
+        <Route path="/registration" component={registerForm} />
         <Route path="/" exact component={loginForm} />
-        <Route path="/register" component={registerForm} />
         <Route path="/login" component={loginForm} />
-
         <Route path="/test" component={testAnyComponent} />
       </Switch>
     </Router>

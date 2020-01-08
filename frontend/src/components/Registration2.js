@@ -1,6 +1,7 @@
 import React from "react";
 import GenericForm from "./common/genericForm";
 import Joi from "@hapi/joi";
+import styled from "styled-components";
 
 const inputfields = {
 
@@ -57,16 +58,16 @@ const inputfields = {
             .pattern(new RegExp("^[a-zA-Z0-9]{3,30}$"))
             .min(7)
             .required()
-            .label("Password")
+            .label("RTPassword")
     }
 };
 
-const RegistrationForm = ({ onSubmit: liftUp }) => {
+const RegistrationForm = ({ onSubmit }) => {
     const handleErrors = result => {
 
         console.log(result.errors);
     };
-    const onSubmit = result => {
+    const onSubmitLocal = result => {
 
         console.log(result.data.password);
 
@@ -76,7 +77,7 @@ const RegistrationForm = ({ onSubmit: liftUp }) => {
 
 
 
-        result.errors.length > 0 ? handleErrors(result) : liftUp(result);
+        result.errors.length > 0 ? handleErrors(result) : onSubmit(result);
 
 
 
@@ -84,7 +85,7 @@ const RegistrationForm = ({ onSubmit: liftUp }) => {
     return (
         <GenericForm
             inputfields={inputfields}
-            onSubmit={onSubmit}
+            onSubmit={onSubmitLocal}
             formtitle="Registration Form"
             buttonlabel="Create!"
         />
