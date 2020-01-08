@@ -48,23 +48,31 @@ export const login = credentials => dispatch => {
         console.log(`Success 1: ${res.data.token}.`);
 
         axios.create({
-            "Content-Type": "application/json",
+            baseURL: "https://dev-desk-back-end.herokuapp.com/api",
             headers: {
                 Authorization: res.data.token
             }
         })
           .post(`${API}/students`)
           .then(res2 => {
-            console.log(`Success 2: ${res2.data.token}.`);
+            console.log("Student ID or whatever", res2)
+            axios.put({
+              baseURL: "https://dev-desk-back-end.herokuapp.com/api",
+              headers: {
+                  Authorization: res2.data.token
+              }
+          })
+          localStorage.setItem("Authorization", res2.data.token)
+          //   console.log(`Success 2: ${res2.data.token}.`);
 
-            dispatch({
-              type: LOGIN_SUCCESS,
-              token: res2.data.token,
-              id: res2.data.id,
-              student_id: res2.data.student_id,
-              status: "success",
-              message: res.data.message
-            });
+          //   dispatch({
+          //     type: LOGIN_SUCCESS,
+          //     token: res2.data.token,
+          //     id: res2.data.id,
+          //     student_id: res2.data.student_id,
+          //     status: "success",
+          //     message: res.data.message
+          //   });
 
             setTimeout(() => dispatch({ type: LOGIN_RESOLVED }), 1500);
           })
@@ -168,6 +176,25 @@ export const helperEditTicket = (id, updatedTicket) => dispatch => {
     });
 };
 
+// Helper ID
+
+export const HELPER_ID_NEW_TOKEN_START = "HELPER_ID_NEW_TOKEN_START";
+export const HELPER_ID_NEW_TOKEN_SUCCESS = "HELPER_ID_NEW_TOKEN_SUCCESS";
+export const HELPER_ID_NEW_TOKEN_FAIL = "HELPER_ID_NEW_TOKEN_FAIL";
+export const helperIdNewToken = () => dispatch => {
+  dispatch({ type: HELPER_ID_NEW_TOKEN_START });
+  return axios 
+  // axiosWithAuth()
+    .post(`${API}/helpers`)
+    .then(res => {
+      console.log("helper ID", res)
+      // localStorage.setItem("helperAuthentication", action.token);
+      dispatch({ type: HELPER_ID_NEW_TOKEN_SUCCESS, payload: res.data });
+    })
+    .catch(err => {
+      dispatch({ type: HELPER_ID_NEW_TOKEN_FAIL, payload: err });
+    });
+};
 
 // Action for admins to resolve & reopen tickets
 

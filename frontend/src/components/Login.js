@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 import { LoginForm, LoginHeader } from "../hooks/index";
 import { connect } from "react-redux";
-import { login } from "../actions/actions";
+import { login, helperIdNewToken } from "../actions/actions";
 
 class Login extends Component {
   state = {
@@ -21,6 +21,11 @@ class Login extends Component {
       }
     });
   };
+
+  helper = e => {
+    e.preventDefault();
+    this.props.helperIdNewToken();
+  }
 
   login = e => {
     e.preventDefault();
@@ -64,6 +69,7 @@ class Login extends Component {
             required
           />
           <button type="submit">Login</button>
+          <button type="button" onClick={this.helper}>Helper</button>
           <div className="extra">
             <p>
               Create an Account? <Link to="/registration">Sign up!</Link>
@@ -83,5 +89,5 @@ const mapStateToProps = state => {
 };
 export default connect(
   mapStateToProps,
-  { login }
+  { login, helperIdNewToken }
 )(Login);
