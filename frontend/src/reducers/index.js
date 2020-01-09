@@ -2,6 +2,12 @@ import {
   FETCH_DATA_START,
   FETCH_DATA_SUCCESS,
   FETCH_DATA_FAIL,
+  FETCH_HELP_DATA_START,
+  FETCH_HELP_DATA_SUCCESS,
+  FETCH_HELP_DATA_FAIL,
+  FETCH_ALL_START,
+  FETCH_ALL_SUCCESS,
+  FETCH_ALL_FAIL,
   CREATE_TICKET_START,
   CREATE_TICKET_SUCCESS,
   CREATE_TICKET_FAIL,
@@ -67,6 +73,42 @@ const reducers = (state = initialState, action) => {
         tickets: action.payload
       };
     case FETCH_DATA_FAIL:
+      return {
+        ...state,
+        fetchingData: false,
+        error: action.payload
+      };
+      case FETCH_ALL_START:
+      return {
+        ...state,
+        fetchingData: true,
+        error: null
+      };
+    case FETCH_ALL_SUCCESS:
+      return {
+        ...state,
+        fetchingData: false,
+        tickets: action.payload
+      };
+    case FETCH_ALL_FAIL:
+      return {
+        ...state,
+        fetchingData: false,
+        error: action.payload
+      };
+      case FETCH_HELP_DATA_START:
+      return {
+        ...state,
+        fetchingData: true,
+        error: null
+      };
+    case FETCH_HELP_DATA_SUCCESS:
+      return {
+        ...state,
+        fetchingData: false,
+        tickets: action.payload
+      };
+    case FETCH_HELP_DATA_FAIL:
       return {
         ...state,
         fetchingData: false,

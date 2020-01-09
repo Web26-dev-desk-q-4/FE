@@ -71,7 +71,7 @@ export const getData = () => dispatch => {
   return axiosWithAuth()
     .get(`${API}/tickets/3`)
     .then(res => {
-      // console.log("Get student's tickets", res);
+      console.log("Get student's tickets", res);
       dispatch({ type: FETCH_DATA_SUCCESS, payload: res.data });
     })
     .catch(err => {
@@ -79,6 +79,43 @@ export const getData = () => dispatch => {
       dispatch({ type: FETCH_DATA_FAIL, payload: err });
     });
 };
+// get Help Data
+export const FETCH_HELP_DATA_START = "FETCH_DATA_START";
+export const FETCH_HELP_DATA_SUCCESS = "FETCH_DATA_SUCCESS";
+export const FETCH_HELP_DATA_FAIL = "FETCH_DATA_FAIL";
+export const getHelpData = () => dispatch => {
+  // dispatch({ type: FETCH_DATA_START });
+  return axiosWithAuth()
+    .get(`${API}/tickets/helper/:id`)
+    .then(res => {
+      console.log("Get helper's tickets", res);
+      // dispatch({ type: FETCH_DATA_SUCCESS, payload: res.data });
+    })
+    .catch(err => {
+      // console.log("you've fucked up", err);
+      // dispatch({ type: FETCH_DATA_FAIL, payload: err });
+    });
+};
+
+// Get ALL Data
+export const FETCH_ALL_START = "FETCH_DATA_START";
+export const FETCH_ALL_SUCCESS = "FETCH_DATA_SUCCESS";
+export const FETCH_ALL_FAIL = "FETCH_DATA_FAIL";
+export const getAllData = () => dispatch => {
+  dispatch({ type: FETCH_ALL_START });
+  return axiosWithAuth()
+    .get(`${API}/tickets/helper/`)
+    .then(res => {
+      console.log("Get all tickets", res);
+      dispatch({ type: FETCH_ALL_SUCCESS, payload: res.data });
+    })
+    .catch(err => {
+      console.log("you've fucked up again", err);
+      dispatch({ type: FETCH_ALL_FAIL, payload: err });
+    });
+};
+
+//
 export const GET_USER = "GET_USER";
 export const GET_USER_FAIL = "GET_USER_FAIL";
 export const getUser = id => dispatch => {

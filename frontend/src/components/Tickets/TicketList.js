@@ -2,11 +2,11 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { ItemDiv } from "../../hooks";
 import TicketItem from "./TicketItem";
-import { getData } from "../../actions/actions";
+import { getAllData } from "../../actions/actions";
 import Dashboard from "../Dashboard/Dashboard";
 class TicketList extends Component {
   componentDidMount() {
-    this.props.getData();
+    this.props.getAllData();
     console.log(this.props);
   }
   render() {
@@ -38,5 +38,5 @@ const mapStateToProps = state => {
 };
 export default connect(
   mapStateToProps,
-  { getData }
+  { getAllData }
 )(TicketList);
