@@ -27,12 +27,13 @@ const inputfields = {
 
 const LoginForm = props => {
   const { onSubmit: liftUp } = props;
-  // const handleErrors = result => {
-  //   console.log(result.errors);
-  // };
-  // const onSubmit = result => {
-  //   result.errors.length > 0 ? handleErrors(result) : liftUp(result);
-  // };
+  const handleErrors = result => {
+    console.log(result.errors);
+  };
+  const onSubmit = result => {
+    result.errors.length > 0 ? handleErrors(result) : liftUp(result);
+    console.log(result)
+  };
 
   const doLogin = accountInfo => {
     // const uname = accountInfo.username;
@@ -57,7 +58,7 @@ const LoginForm = props => {
   return (
     <GenericForm
       inputfields={inputfields}
-      onSubmit={doLogin}
+      onSubmit={onSubmit}
       formtitle="Login"
       buttonlabel="Sign In"
     />

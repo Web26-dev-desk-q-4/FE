@@ -17,22 +17,24 @@ import TestFormSelect from "./components/testFormSelect"; // example form
 import axios from "axios";
 
 function App() {
+  let history = Router.history;
+  //https://reacttraining.com/react-router/core/api/Hooks/usehistory
   const [appState, setAppState] = useState({
     account: { username: "", password: "" }
   });
-  const endPointURL = "https://whatever.what";
-  // const uhist = useHistory();
+  const endPointURL = "https://dev-desk-back-end.herokuapp.com/api";
+  
   const loginFormSubmit = ({ data: account, errors }) => {
     // we should send the account info to the backend
     const clone = { ...appState };
     clone.account = account;
     axios.put(endPointURL, account).then(result => {
-      // do something
-      //history.replace("/nextpage");
-    });
+      //    do something
+      history.push("/my_tickets");
+    }).catch(error => console.log(error))
     setAppState(clone);
+    console.log(account)
   };
-
   const registrationFormSubmit = props => {
     const { data } = props;
     console.log(data);
@@ -78,7 +80,7 @@ function App() {
         <PrivateRoute exact path="/tickets" component={TicketViews} />
         <Route path="/registration" component={registerForm} />
         <Route path="/" exact component={loginForm} />
-        <Route path="/login" component={loginForm} />
+        {/* <Route path="/login" component={loginForm} /> */}
         <Route path="/test" component={testAnyComponent} />
       </Switch>
     </Router>
