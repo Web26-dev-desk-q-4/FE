@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import { helperIdNewToken, studentIdNewToken } from "../../actions/actions";
+import { helperIdNewToken, studentIdNewToken, getData } from "../../actions/actions";
 
 import { DashNav, DashNav2 } from "../../hooks/index";
 
@@ -30,6 +30,7 @@ const DashboardMenu = props => {
         <Link to="/tickets">
           <li>All Tickets</li>
         </Link>
+        <button type="button" onClick={() => props.getData()}>Student Tickets</button>
       </ul>
     </DashNav>
 
@@ -54,7 +55,7 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = {
-  helperIdNewToken, studentIdNewToken
+  helperIdNewToken, studentIdNewToken, getData
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(DashboardMenu);

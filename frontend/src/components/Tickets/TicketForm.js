@@ -1,10 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-
 import { SForm, TicketH1 } from "../../hooks/index";
-import { createTicket } from "../../actions/actions";
+import { createTicketCard } from "../../actions/actions";
 import Dashboard from "../Dashboard/Dashboard";
-
 class TicketForm extends Component {
   state = {
     ticket: {
@@ -14,16 +12,14 @@ class TicketForm extends Component {
       what_was_tried: ""
     }
   };
-
   handleChange = e => {
     this.setState({
       ticket: { ...this.state.ticket, [e.target.name]: e.target.value }
     });
   };
-
   handleSubmit = e => {
     e.preventDefault();
-    this.props.createTicket(this.state.ticket);
+    this.props.createTicketCard(this.state.ticket);
     this.props.history.push(`/tickets`);
     this.setState({
       title: "",
@@ -31,7 +27,6 @@ class TicketForm extends Component {
       user_id: ""
     });
   };
-
   render() {
     return (
       <Dashboard>
@@ -79,7 +74,6 @@ class TicketForm extends Component {
     );
   }
 }
-
 const mapStateToProps = state => {
   return {
     tickets: state.tickets,
@@ -87,8 +81,7 @@ const mapStateToProps = state => {
     categories: state.categories
   };
 };
-
 export default connect(
   mapStateToProps,
-  { createTicket }
+  { createTicketCard }
 )(TicketForm);

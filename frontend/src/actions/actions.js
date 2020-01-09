@@ -2,7 +2,7 @@ import axios from "axios";
 import { axiosWithAuth } from "../utils/axiosWithAuth";
 // Action to Perform Login operation
 const API = "https://dev-desk-back-end.herokuapp.com/api";
-const authAxios = axiosWithAuth();
+// const authAxios = axiosWithAuth();
 // Create User Actions
 export const CREATE_START = "CREATE_START";
 export const CREATE_SUCCESS = "CREATE_SUCCESS";
@@ -67,20 +67,22 @@ export const FETCH_DATA_START = "FETCH_DATA_START";
 export const FETCH_DATA_SUCCESS = "FETCH_DATA_SUCCESS";
 export const FETCH_DATA_FAIL = "FETCH_DATA_FAIL";
 export const getData = () => dispatch => {
-  dispatch({ type: FETCH_DATA_START });
-  axiosWithAuth()
+  // dispatch({ type: FETCH_DATA_START });
+  return axiosWithAuth()
     .get(`${API}/tickets/3`)
     .then(res => {
+      // console.log("Get student's tickets", res);
       dispatch({ type: FETCH_DATA_SUCCESS, payload: res.data });
     })
     .catch(err => {
+      // console.log("you've fucked up", err);
       dispatch({ type: FETCH_DATA_FAIL, payload: err });
     });
 };
 export const GET_USER = "GET_USER";
 export const GET_USER_FAIL = "GET_USER_FAIL";
 export const getUser = id => dispatch => {
-  axiosWithAuth()
+  return axiosWithAuth()
     .get(`${API}/tickets/${id}`)
     .then(res => {
       dispatch({ type: GET_USER, payload: res.data.username });
@@ -93,40 +95,20 @@ export const getUser = id => dispatch => {
 export const CREATE_TICKET_START = "CREATE_TICKET_START";
 export const CREATE_TICKET_SUCCESS = "CREATE_TICKET_SUCCESS";
 export const CREATE_TICKET_FAIL = "CREATE_TICKET_FAIL";
-export const createTicket = (newTicket) => dispatch => {
+export const createTicketCard = (newTicket) => dispatch => {
   dispatch({ type: CREATE_TICKET_START });
-  axiosWithAuth()
+  return axiosWithAuth()
     .post(`${API}/tickets/create/3`, newTicket)
     .then(res => {
+      console.log("Hey hey hey...", res);
       dispatch({
         type: CREATE_TICKET_SUCCESS,
         payload: res.data
       });
     })
     .catch(err => {
+      console.log("did you really fuck up", err);
       dispatch({ type: CREATE_TICKET_FAIL, payload: err.response });
-    });
-};
-// Action to update ticket information
-export const HELPER_EDIT_TICKET_START = "HELPER_EDIT_TICKET_START";
-export const HELPER_EDIT_TICKET_SUCCESS = "HELPER_EDIT_TICKET_SUCCESS";
-export const HELPER_EDIT_TICKET_FAIL = "HELPER_EDIT_TICKET_FAIL";
-export const helperEditTicket = (id, updatedTicket) => dispatch => {
-  dispatch({ type: HELPER_EDIT_TICKET_START });
-  axiosWithAuth()
-    .put(
-      `${API}/tickets/edit/${id}`,
-      updatedTicket
-    )
-    .then(res => {
-      dispatch({
-        type: HELPER_EDIT_TICKET_SUCCESS,
-        payload: res.data,
-        id
-      });
-    })
-    .catch(err => {
-      dispatch({ type: HELPER_EDIT_TICKET_FAIL, payload: err.response });
     });
 };
 // Helper ID
@@ -171,6 +153,28 @@ export const studentIdNewToken = () => dispatch => {
       console.log("I'm a student...", err)
     })
 }
+// Action to update ticket information
+export const HELPER_EDIT_TICKET_START = "HELPER_EDIT_TICKET_START";
+export const HELPER_EDIT_TICKET_SUCCESS = "HELPER_EDIT_TICKET_SUCCESS";
+export const HELPER_EDIT_TICKET_FAIL = "HELPER_EDIT_TICKET_FAIL";
+export const helperEditTicket = (id, updatedTicket) => dispatch => {
+  dispatch({ type: HELPER_EDIT_TICKET_START });
+  axiosWithAuth()
+    .put(
+      `${API}/tickets/edit/${id}`,
+      updatedTicket
+    )
+    .then(res => {
+      dispatch({
+        type: HELPER_EDIT_TICKET_SUCCESS,
+        payload: res.data,
+        id
+      });
+    })
+    .catch(err => {
+      dispatch({ type: HELPER_EDIT_TICKET_FAIL, payload: err.response });
+    });
+};
 // Action for admins to resolve & reopen tickets
 export const RESOLVE_TICKET_START = "RESOLVE_TICKET_START";
 export const RESOLVE_TICKET_SUCCESS = "RESOLVE_TICKET_SUCCESS";

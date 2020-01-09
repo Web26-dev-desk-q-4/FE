@@ -32,7 +32,6 @@ import {
   GET_USER,
   GET_USER_FAIL
 } from "../actions/actions";
-
 const initialState = {
   errorStatusCode: null,
   fetchingData: false,
@@ -46,16 +45,13 @@ const initialState = {
   status: null,
   error: null,
   credentials: [],
-
   users: [],
   user: {
     student_id: ""
   },
-
-  categories: ["None", "React", "JavaScript", "HTML", "CSS"],
+  categories: ["None", "Vue", "React", "JavaScript", "HTML", "CSS"],
   tickets: []
 };
-
 const reducers = (state = initialState, action) => {
   switch (action.type) {
     case FETCH_DATA_START:
@@ -241,7 +237,6 @@ const reducers = (state = initialState, action) => {
         error: action.payload
       };
     }
-
     case RESOLVE_TICKET_START:
       const editTicket = state.tickets.map(ticket => {
         if (Number(ticket.id) === Number(action.id)) {
@@ -263,7 +258,6 @@ const reducers = (state = initialState, action) => {
         ...state,
         error: action.payload
       };
-
     case GET_USER:
       return {
         ...state,
@@ -278,5 +272,4 @@ const reducers = (state = initialState, action) => {
       return state;
   }
 };
-
 export default reducers;

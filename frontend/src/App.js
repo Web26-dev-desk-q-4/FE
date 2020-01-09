@@ -7,7 +7,7 @@ import Registration from "./components/Registration";
 import PrivateRoute from "./components/PrivateRoute";
 import TicketViews from "./views/TicketViews";
 import TicketForm from "./components/Tickets/TicketForm";
-import TicketCard from "./components/Tickets/TicketCard";
+// import TicketCard from "./components/Tickets/TicketCard";
 import Edit from "./components/Tickets/Edit";
 import MyTickets from "./components/Tickets/MyTickets";
 // import axios from "axios";
@@ -41,10 +41,10 @@ function App() {
     <Router>
       {/* <NavBar /> */}
       <Switch>
-        <PrivateRoute
+        {/* <PrivateRoute
           path="/tickets/:id"
           component={props => <TicketCard {...props} />}
-        />
+        /> */}
         <PrivateRoute
           path="/new-ticket"
           component={props => <TicketForm {...props} />}
