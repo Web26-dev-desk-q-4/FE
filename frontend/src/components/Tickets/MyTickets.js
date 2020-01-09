@@ -7,7 +7,7 @@ import { ItemDiv } from "../../hooks/index";
 import TicketItem from "./TicketItem";
 
 const test = props => {
-  console.log("MyTickets.js props:", props)
+  // console.log("MyTickets.js props:", props)
   const ownedTickets = props.tickets.filter(
     ticket => ticket.student_id === props.student_id
   );

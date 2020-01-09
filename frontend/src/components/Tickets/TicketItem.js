@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import { deleteTicket, getUser } from "../../actions/actions";
+import { deleteTicket, getUser, helperAssignTicket } from "../../actions/actions";
 
 class TicketItem extends Component {
   render() {
-    console.log("This is supposed to be ticket info", this.props);
+    // console.log("This is supposed to be ticket info", this.props);
     return (
       <div className="ticket-item">
         <div className="top-section">
@@ -36,6 +36,7 @@ class TicketItem extends Component {
               onClick={() => this.props.deleteTicket(this.props.id)}
               className="fas fa-trash"
             />
+            <button type="button" onClick={() => this.props.helperAssignTicket(this.props.id, {checked_out: true})}>Claim Ticket</button>
           </div>
         </div>
         <div className="bottom-section">
@@ -58,5 +59,5 @@ const mapStateToProps = (state, ownProps) => {
 };
 export default connect(
   mapStateToProps,
-  { deleteTicket, getUser }
+  { deleteTicket, getUser, helperAssignTicket }
 )(TicketItem);

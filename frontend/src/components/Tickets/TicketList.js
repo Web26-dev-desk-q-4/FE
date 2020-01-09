@@ -7,7 +7,7 @@ import Dashboard from "../Dashboard/Dashboard";
 class TicketList extends Component {
   componentDidMount() {
     this.props.getAllData();
-    console.log(this.props);
+    // console.log(this.props);
   }
   render() {
     return (

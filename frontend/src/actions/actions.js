@@ -80,37 +80,37 @@ export const getData = () => dispatch => {
     });
 };
 // get Help Data
-export const FETCH_HELP_DATA_START = "FETCH_DATA_START";
-export const FETCH_HELP_DATA_SUCCESS = "FETCH_DATA_SUCCESS";
-export const FETCH_HELP_DATA_FAIL = "FETCH_DATA_FAIL";
+export const FETCH_HELP_DATA_START = "FETCH_HELP_DATA_START";
+export const FETCH_HELP_DATA_SUCCESS = "FETCH_HELP_DATA_SUCCESS";
+export const FETCH_HELP_DATA_FAIL = "FETCH_HELP_DATA_FAIL";
 export const getHelpData = () => dispatch => {
-  // dispatch({ type: FETCH_DATA_START });
+  // dispatch({ type: FETCH_HELP_DATA_START });
   return axiosWithAuth()
     .get(`${API}/tickets/helper/:id`)
     .then(res => {
       console.log("Get helper's tickets", res);
-      // dispatch({ type: FETCH_DATA_SUCCESS, payload: res.data });
+      // dispatch({ type: FETCH_HELP_DATA_SUCCESS, payload: res.data });
     })
     .catch(err => {
       // console.log("you've fucked up", err);
-      // dispatch({ type: FETCH_DATA_FAIL, payload: err });
+      // dispatch({ type: FETCH_HELP_DATA_FAIL, payload: err });
     });
 };
 
 // Get ALL Data
-export const FETCH_ALL_START = "FETCH_DATA_START";
-export const FETCH_ALL_SUCCESS = "FETCH_DATA_SUCCESS";
-export const FETCH_ALL_FAIL = "FETCH_DATA_FAIL";
+export const FETCH_ALL_START = "FETCH_ALL_START";
+export const FETCH_ALL_SUCCESS = "FETCH_ALL_SUCCESS";
+export const FETCH_ALL_FAIL = "FETCH_ALL_FAIL";
 export const getAllData = () => dispatch => {
   dispatch({ type: FETCH_ALL_START });
   return axiosWithAuth()
     .get(`${API}/tickets/helper/`)
     .then(res => {
-      console.log("Get all tickets", res);
+      // console.log("Get all tickets", res);
       dispatch({ type: FETCH_ALL_SUCCESS, payload: res.data });
     })
     .catch(err => {
-      console.log("you've fucked up again", err);
+      // console.log("you've fucked up again", err);
       dispatch({ type: FETCH_ALL_FAIL, payload: err });
     });
 };
@@ -190,6 +190,30 @@ export const studentIdNewToken = () => dispatch => {
       console.log("I'm a student...", err)
     })
 }
+
+// Assign Helper to ticket
+
+export const HELPER_ASSIGN_TICKET_START = "HELPER_ASSIGN_TICKET_START";
+export const HELPER_ASSIGN_TICKET_SUCCESS = "HELPER_ASSIGN_TICKET_SUCCESS";
+export const HELPER_ASSIGN_TICKET_FAIL = "HELPER_ASSIGN_TICKET_FAIL";
+export const helperAssignTicket = (id, checkedOut) => dispatch => {
+  // dispatch({ type: HELPER_ASSIGN_TICKET_START });
+  axiosWithAuth()
+    .put(`${API}/tickets/checkout/${id}`, checkedOut)
+    .then(res => {
+      console.log("Helper Assign function:", res)
+      // dispatch({
+      //   type: HELPER_ASSIGN_TICKET_SUCCESS,
+      //   payload: res.data,
+      //   id
+      // });
+    })
+    .catch(err => {
+      console.log("Helper Assign function BROKE:", err)
+      // dispatch({ type: HELPER_ASSIGN_TICKET_FAIL, payload: err.response });
+    });
+};
+
 // Action to update ticket information
 export const HELPER_EDIT_TICKET_START = "HELPER_EDIT_TICKET_START";
 export const HELPER_EDIT_TICKET_SUCCESS = "HELPER_EDIT_TICKET_SUCCESS";
