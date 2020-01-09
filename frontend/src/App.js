@@ -23,12 +23,13 @@ function App() {
     account: { username: "", password: "" }
   });
   const endPointURL = "https://dev-desk-back-end.herokuapp.com/api";
+
   
   const loginFormSubmit = ({ data: account, errors }) => {
     // we should send the account info to the backend
     const clone = { ...appState };
     clone.account = account;
-    axios.put(endPointURL, account).then(result => {
+    axios.post(endPointURL + "/auth/login", account).then(result => {
       //    do something
       history.push("/my_tickets");
     }).catch(error => console.log(error))

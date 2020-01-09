@@ -18,7 +18,7 @@ const inputfields = {
     label: "Password",
     type: "password",
     rules: Joi.string()
-      .pattern(new RegExp("^[a-zA-Z0-9]{3,30}$"))
+      .pattern(new RegExp("^[a-zA-Z0-9!@#\$%\^\&\)\(+=_-]{3,30}$"))
       .min(7)
       .required()
       .label("Password")
