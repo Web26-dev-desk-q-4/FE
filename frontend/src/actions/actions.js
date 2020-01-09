@@ -4,7 +4,7 @@ import { axiosWithAuth } from "../utils/axiosWithAuth";
 // Action to Perform Login operation
 
 const API = "https://dev-desk-back-end.herokuapp.com/api";
-
+const authAxios = axiosWithAuth();
 // Create User Actions
 
 export const CREATE_START = "CREATE_START";
@@ -46,46 +46,13 @@ export const login = credentials => dispatch => {
     .then(res => {
       if (res.status === 200) {
         console.log(`Success 1: ${res.data.token}.`);
-
+        localStorage.setItem("Authorization", res.data.token);
         axios.create({
-            baseURL: "https://dev-desk-back-end.herokuapp.com/api",
+            baseURL: "https://dev-desk-back-end.herokuapp.com/",
             headers: {
                 Authorization: res.data.token
             }
-        })
-          .post(`${API}/students`)
-          .then(res2 => {
-            console.log("Student ID or whatever", res2)
-            axios.put({
-              baseURL: "https://dev-desk-back-end.herokuapp.com/api",
-              headers: {
-                  Authorization: res2.data.token
-              }
-          })
-          localStorage.setItem("Authorization", res2.data.token)
-          //   console.log(`Success 2: ${res2.data.token}.`);
-
-          //   dispatch({
-          //     type: LOGIN_SUCCESS,
-          //     token: res2.data.token,
-          //     id: res2.data.id,
-          //     student_id: res2.data.student_id,
-          //     status: "success",
-          //     message: res.data.message
-          //   });
-
-            setTimeout(() => dispatch({ type: LOGIN_RESOLVED }), 1500);
-          })
-          .catch(err => {
-            if (err.response.status === 500 || err.response.status === 404) {
-              dispatch({
-                type: LOGIN_FAIL,
-                payload: err.response.data.msg,
-                status: "error"
-              });
-            }
-            setTimeout(() => dispatch({ type: LOGIN_RESOLVED }), 1500);
-          });
+        }) // LOGIN_SUCCESS should be here
       } else {
         console.log("Status: " + res.status);
       }
@@ -182,18 +149,44 @@ export const HELPER_ID_NEW_TOKEN_START = "HELPER_ID_NEW_TOKEN_START";
 export const HELPER_ID_NEW_TOKEN_SUCCESS = "HELPER_ID_NEW_TOKEN_SUCCESS";
 export const HELPER_ID_NEW_TOKEN_FAIL = "HELPER_ID_NEW_TOKEN_FAIL";
 export const helperIdNewToken = () => dispatch => {
-  dispatch({ type: HELPER_ID_NEW_TOKEN_START });
-  return axios 
-  // axiosWithAuth()
+  return authAxios
     .post(`${API}/helpers`)
     .then(res => {
-      console.log("helper ID", res)
-      // localStorage.setItem("helperAuthentication", action.token);
-      dispatch({ type: HELPER_ID_NEW_TOKEN_SUCCESS, payload: res.data });
+      console.log("First thing's first", res);
+      localStorage.setItem("Authorization", res.data.token);
+        axios.put({
+            baseURL: "https://dev-desk-back-end.herokuapp.com/api",
+            headers: {
+                Authorization: res.data.token
+            }
+        })
     })
     .catch(err => {
-      dispatch({ type: HELPER_ID_NEW_TOKEN_FAIL, payload: err });
-    });
+      console.log("I'm the realest", err)
+    })
+}
+
+
+// Student IDs
+
+export const STUDENT_ID_NEW_TOKEN_START = "STUDENT_ID_NEW_TOKEN_START";
+export const STUDENT_ID_NEW_TOKEN_SUCCESS = "STUDENT_ID_NEW_TOKEN_SUCCESS";
+export const STUDENT_ID_NEW_TOKEN_FAIL = "STUDENT_ID_NEW_TOKEN_FAIL";
+export const studentIdNewToken = () => dispatch => {
+  dispatch({ type: STUDENT_ID_NEW_TOKEN_START });
+  return axios
+    .post(`${API}/students`)
+    .then(res => {
+      console.log("Students ID or whatever", res)
+      axios.put({
+        headers: {
+          Authorization: res.data.token
+        }
+    })
+    .catch(err => {
+     console.log("Hahahah!", err)
+    })
+  })
 };
 
 // Action for admins to resolve & reopen tickets

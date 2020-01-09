@@ -16,6 +16,12 @@ import {
   LOGIN_FAIL,
   LOGOUT_SUCCESS,
   LOGIN_RESOLVED,
+  HELPER_ID_NEW_TOKEN_START,
+  HELPER_ID_NEW_TOKEN_SUCCESS,
+  HELPER_ID_NEW_TOKEN_FAIL,
+  STUDENT_ID_NEW_TOKEN_START,
+  STUDENT_ID_NEW_TOKEN_SUCCESS,
+  STUDENT_ID_NEW_TOKEN_FAIL,
   RESOLVE_TICKET_START,
   RESOLVE_TICKET_SUCCESS,
   RESOLVE_TICKET_FAIL,
@@ -168,6 +174,42 @@ const reducers = (state = initialState, action) => {
       return {
         ...state,
         isLoggedIn: false
+      };
+    case HELPER_ID_NEW_TOKEN_START:
+      return {
+        ...state,
+        fetchingData: true,
+        error: null
+      };
+    case HELPER_ID_NEW_TOKEN_SUCCESS:
+      return {
+        ...state,
+        fetchingData: false,
+        tickets: action.payload
+      };
+    case HELPER_ID_NEW_TOKEN_FAIL:
+      return {
+        ...state,
+        fetchingData: false,
+        error: action.payload
+      };
+      case STUDENT_ID_NEW_TOKEN_START:
+      return {
+        ...state,
+        fetchingData: true,
+        error: null
+      };
+    case STUDENT_ID_NEW_TOKEN_SUCCESS:
+      return {
+        ...state,
+        fetchingData: false,
+        tickets: action.payload
+      };
+    case STUDENT_ID_NEW_TOKEN_FAIL:
+      return {
+        ...state,
+        fetchingData: false,
+        error: action.payload
       };
     case CREATE_START: {
       return {

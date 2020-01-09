@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 // import NavBar from "./components/NavBar";
@@ -10,32 +10,32 @@ import TicketForm from "./components/Tickets/TicketForm";
 import TicketCard from "./components/Tickets/TicketCard";
 import Edit from "./components/Tickets/Edit";
 import MyTickets from "./components/Tickets/MyTickets";
-import axios from "axios";
+// import axios from "axios";
 
 function App() {
-  const [appState, setAppState] = useState({
-    account: { username: "", password: "" }
-  });
-  const endPointURL = "https://whatever.what";
-  const loginFormSubmit = ({ data: account, errors }) => {
-    const clone = { ...appState };
-    clone.account = account;
-    axios.put(endPointURL, account).then(result => {
-    });
-    setAppState(clone);
-  };
+  // const [appState, setAppState] = useState({
+  //   account: { username: "", password: "" }
+  // });
+  // const endPointURL = "https://whatever.what";
+  // const loginFormSubmit = ({ data: account, errors }) => {
+  //   const clone = { ...appState };
+  //   clone.account = account;
+  //   axios.put(endPointURL, account).then(result => {
+  //   });
+  //   setAppState(clone);
+  // };
 
-  const registrationFormSubmit = props => {
-    const { data } = props;
-    console.log(data);
-  };
-  const loginForm = () => {
-    return <Login onSubmit={loginFormSubmit} />;
-  };
+  // const registrationFormSubmit = props => {
+  //   const { data } = props;
+  //   console.log(data);
+  // };
+  // const loginForm = () => {
+  //   return <Login onSubmit={loginFormSubmit} />;
+  // };
 
-  const registerForm = () => {
-    return <Registration onSubmit={registrationFormSubmit} />;
-  };
+  // const registerForm = () => {
+  //   return <Registration onSubmit={registrationFormSubmit} />;
+  // };
 
   return (
     <Router>
