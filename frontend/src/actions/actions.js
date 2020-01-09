@@ -84,16 +84,16 @@ export const FETCH_HELP_DATA_START = "FETCH_HELP_DATA_START";
 export const FETCH_HELP_DATA_SUCCESS = "FETCH_HELP_DATA_SUCCESS";
 export const FETCH_HELP_DATA_FAIL = "FETCH_HELP_DATA_FAIL";
 export const getHelpData = () => dispatch => {
-  // dispatch({ type: FETCH_HELP_DATA_START });
+  dispatch({ type: FETCH_HELP_DATA_START });
   return axiosWithAuth()
     .get(`${API}/tickets/helper/:id`)
     .then(res => {
       console.log("Get helper's tickets", res);
-      // dispatch({ type: FETCH_HELP_DATA_SUCCESS, payload: res.data });
+      dispatch({ type: FETCH_HELP_DATA_SUCCESS, payload: res.data });
     })
     .catch(err => {
       // console.log("you've fucked up", err);
-      // dispatch({ type: FETCH_HELP_DATA_FAIL, payload: err });
+      dispatch({ type: FETCH_HELP_DATA_FAIL, payload: err });
     });
 };
 

@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 import { LoginForm, LoginHeader } from "../hooks/index";
 import { connect } from "react-redux";
-import { login, helperIdNewToken } from "../actions/actions";
+import { login, helperIdNewToken, logout } from "../actions/actions";
 
 class Login extends Component {
   state = {
@@ -12,6 +12,12 @@ class Login extends Component {
       password: ""
     }
   };
+
+
+  componentDidMount() {
+    this.props.logout();
+    localStorage.setItem("Authorization", "");
+  }
 
   handleChange = e => {
     this.setState({
@@ -89,5 +95,5 @@ const mapStateToProps = state => {
 };
 export default connect(
   mapStateToProps,
-  { login, helperIdNewToken }
+  { login, logout, helperIdNewToken }
 )(Login);

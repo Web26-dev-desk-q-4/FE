@@ -31,7 +31,6 @@ const DashboardMenu = props => {
           <li>All Tickets</li>
         </Link>
         <button type="button" onClick={() => props.getData()}>Student Tickets</button>
-        <button type="button" onClick={() => props.getHelpData()}>Helper Tickets</button>
       </ul>
     </DashNav>
 

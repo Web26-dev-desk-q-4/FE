@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { LoginForm, LoginHeader } from "../hooks/index";
 import { connect } from "react-redux";
-import { create } from "../actions/actions";
+import { create, logout } from "../actions/actions";
 
 class Registration extends Component {
   state = {
@@ -11,6 +11,11 @@ class Registration extends Component {
       password: ""
     }
   };
+  
+  componentDidMount() {
+    this.props.logout();
+    localStorage.setItem("Authorization", "");
+  }
 
   handleChange = e => {
     this.setState({
@@ -81,5 +86,5 @@ const mapStateToProps = state => {
 };
 export default connect(
   mapStateToProps,
-  { create }
+  { create, logout }
 )(Registration);

@@ -53,7 +53,8 @@ const initialState = {
   credentials: [],
   users: [],
   user: {
-    student_id: ""
+    student_id: "",
+    helper_id: ""
   },
   categories: ["None", "Vue", "React", "JavaScript", "HTML", "CSS"],
   tickets: []
@@ -210,8 +211,21 @@ const reducers = (state = initialState, action) => {
     }
     case LOGOUT_SUCCESS:
       return {
-        ...state,
-        isLoggedIn: false
+        errorStatusCode: null,
+        fetchingData: false,
+        isLoggingIn: false,
+        isLoggedIn: false,
+        isSigningUp: false,
+        creatingTicket: false,
+        updatingTicket: false,
+        resolvingTicket: false,
+        deletingTicket: false,
+        status: null,
+        error: null,
+        credentials: [],
+        users: [],
+        tickets: [],
+        categories: ["None", "Vue", "React", "JavaScript", "HTML", "CSS"],
       };
     case HELPER_ID_NEW_TOKEN_START:
       return {

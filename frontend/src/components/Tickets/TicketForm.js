@@ -20,7 +20,7 @@ class TicketForm extends Component {
   handleSubmit = e => {
     e.preventDefault();
     this.props.createTicketCard(this.state.ticket);
-    this.props.history.push(`/tickets`);
+    this.props.history.push(`/my-tickets`);
     this.setState({
       title: "",
       description: "",

@@ -1,24 +1,45 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
 
-import { deleteTicket } from "../../actions/actions";
+import { deleteTicket, getHelpData, getData } from "../../actions/actions";
 import Dashboard from "../Dashboard/Dashboard";
 import { ItemDiv } from "../../hooks/index";
 import TicketItem from "./TicketItem";
 
-const test = props => {
-  // console.log("MyTickets.js props:", props)
-  const ownedTickets = props.tickets.filter(
-    ticket => ticket.student_id === props.student_id
-  );
-  const claimedTickets = props.tickets.filter(
-    ticket => ticket.assigned_user === props.student_id
-  );
-  if (props.isAdmin) {
+const Test = props => {
+  console.log("MyTickets props:", props.tickets)
+
+  useEffect(() => {
+    // props.getHelpData();
+    props.getData();
+  },[])
+
+  const createdTickets = props.tickets;
+
+  // const assignedTickets = props.tickets
+
     return (
       <Dashboard>
+        {/* <ItemDiv>
+          <h1>Your Assigned Tickets as A Helper</h1>
+          {assignedTickets.map(ticket => (
+            <TicketItem
+              key={ticket.id}
+              id={ticket.id}
+              ticket={ticket}
+              title={ticket.title}
+              category={ticket.category}
+              createdBy={ticket.student_id}
+              assigned={ticket.assigned}
+              resolved={ticket.resolved}
+              assignedUser={ticket.assigned_user}
+              description={ticket.description}
+            />
+          ))}
+        </ItemDiv> */}
         <ItemDiv>
-          {claimedTickets.map(ticket => (
+        <h1>Your Created Tickets as A Student</h1>
+          {createdTickets.map(ticket => (
             <TicketItem
               key={ticket.id}
               id={ticket.id}
@@ -35,28 +56,6 @@ const test = props => {
         </ItemDiv>
       </Dashboard>
     );
-  } else {
-    return (
-      <Dashboard>
-        <ItemDiv>
-          {ownedTickets.map(ticket => (
-            <TicketItem
-              key={ticket.id}
-              id={ticket.id}
-              ticket={ticket}
-              title={ticket.title}
-              category={ticket.category}
-              createdBy={ticket.student_id}
-              assigned={ticket.assigned}
-              resolved={ticket.resolved}
-              assignedUser={ticket.assigned_user}
-              description={ticket.description}
-            />
-          ))}
-        </ItemDiv>
-      </Dashboard>
-    );
-  }
 };
 
 const mapStateToProps = state => {
@@ -68,5 +67,5 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  { deleteTicket }
-)(test);
+  { deleteTicket, getHelpData, getData }
+)(Test);
