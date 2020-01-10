@@ -32,10 +32,13 @@ class TicketItem extends Component {
             </p>
           </div>
           <div className="delete-item">
-            <i
+            <button
+              type="button"
               onClick={() => this.props.deleteTicket(this.props.id)}
-              className="fas fa-trash"
-            />
+              // className="fas fa-trash"
+            >
+              DELETE
+            </button>
             <button type="button" onClick={() => this.props.helperAssignTicket(this.props.id, {checked_out: true})}>Claim Ticket</button>
           </div>
         </div>

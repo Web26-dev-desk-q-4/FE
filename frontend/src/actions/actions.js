@@ -158,6 +158,10 @@ export const helperIdNewToken = () => dispatch => {
     .then(res => {
       console.log("First thing's first", res);
       localStorage.setItem("Authorization", res.data.token);
+      dispatch({
+        type: HELPER_ID_NEW_TOKEN_SUCCESS,
+        payload: res.data.user.helper_id
+      })
         // axios.put({
         //     baseURL: "https://dev-desk-back-end.herokuapp.com/api",
         //     headers: {
@@ -265,7 +269,7 @@ export const deleteTicket = id => dispatch => {
     .then(res => {
       dispatch({
         type: DELETE_TICKET_SUCCESS,
-        payload: res.data
+        // payload: res.data
       });
     })
     .catch(err => {

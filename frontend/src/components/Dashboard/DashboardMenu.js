@@ -1,11 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import { helperIdNewToken, studentIdNewToken, getData, getHelpData } from "../../actions/actions";
+import { helperIdNewToken, studentIdNewToken } from "../../actions/actions";
 
 import { DashNav, DashNav2 } from "../../hooks/index";
 
 const DashboardMenu = props => {
+  console.log("Dashboard menu props", props)
   // const helper = e => {
   //   console.log("helper clicked")
   //   e.preventDefault();
@@ -21,16 +22,25 @@ const DashboardMenu = props => {
     <section>
     <DashNav className="dash-panel">
       <ul>
-        <Link to="/new-ticket">
+        {/* Students Only */}
+        <Link to="/new-ticket" 
+        // style={ ? { display: 'none' } : {}}
+        >
           <li>Create Ticket</li>
         </Link>
-        <Link to="/my-tickets">
+        <Link to="/my-tickets" 
+        // style={!localStorage.getItem('token') ? {} : { display: 'none' }}
+        >
           <li>My Tickets</li>
         </Link>
-        <Link to="/tickets">
+
+        {/* Helpers Only */}
+        <Link to="/tickets" 
+        // style={!props.user.helper_id ? { display: 'none' } : {}}
+        >
           <li>All Tickets</li>
         </Link>
-        <button type="button" onClick={() => props.getData()}>Student Tickets</button>
+
       </ul>
     </DashNav>
 
@@ -55,7 +65,7 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = {
-  helperIdNewToken, studentIdNewToken, getData, getHelpData
+  helperIdNewToken, studentIdNewToken
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(DashboardMenu);

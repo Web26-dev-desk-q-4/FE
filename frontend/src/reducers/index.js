@@ -142,8 +142,8 @@ const reducers = (state = initialState, action) => {
     case DELETE_TICKET_SUCCESS:
       return {
         ...state,
-        deletingTicket: false,
-        tickets: action.payload
+        // deletingTicket: false,
+        // tickets: action.payload
       };
     case DELETE_TICKET_FAIL:
       return {
@@ -237,7 +237,9 @@ const reducers = (state = initialState, action) => {
       return {
         ...state,
         fetchingData: false,
-        tickets: action.payload
+        user: {
+          helper_id: action.payload
+        }
       };
     case HELPER_ID_NEW_TOKEN_FAIL:
       return {
